@@ -17,3 +17,6 @@ class Match:
             self.player_1._color = "Black"
             self.player_2._color = "White"
         
+
+    def update_results(self, results=[]):
+        self.results = results

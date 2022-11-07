@@ -5,7 +5,7 @@ class PlayerView:
         print("Players list\n")
         print("ID\tFirst Name\tLast Name\tScore")
         for player in players:
-            print(f"{player.id}\t{player.first_name}\t{player.last_name}\t{player.score}")
+            print(f"{player.id}\t{player.first_name}\t{player.last_name}\t")
 
         print("\n1. New player")
         print("2. Edit player")

@@ -142,20 +142,19 @@ class TournamentView:
         print(f"{round.name}:")
         for match in round.matches:
             print(
-                f"# {match.name} - {match.player_1.first_name} {match.player_1.last_name} vs {match.player_2.first_name} {match.player_2.last_name} - {match.results}"
+                f"# {match.name} - {match.player_1.first_name} {match.player_1.last_name} vs {match.player_2.first_name} {match.player_2.last_name} - {match.results} 1"
             )
         print("")
         # show options
         options = 0
-        for match in round.matches:
-            if len(match.results) == 0:
-                print(f"{options + 1}. Enter results - {match.name}")
+        for match in range(len(round.matches)):
+            if len(round.matches[match].results) == 0:
+                print(f"{match + 1}. Enter results - {round.matches[match].name}")
                 options += 1
-
+        
         if options == 0:
-            choice = "0"
-            return choice, None
-        else:
+            return "0", None
+        else: 
             choice = input("\nChoice: ")
             extra_info = None
 
@@ -169,6 +168,7 @@ class TournamentView:
                 extra_info = round.matches[3]
 
             return choice, extra_info
+            
     
     @classmethod
     def save_scores(cls, match):

@@ -1,11 +1,15 @@
 from chess.models.player import Player
 from chess.views.player_view import PlayerView
+from chess.models.database import Database
 
 
 class PlayerController:
 
     @classmethod
     def list(cls, store, route_params=None):
+        """table = store.table("players")
+        players = table.all()
+        choice, player_id = PlayerView.display_list(Player.from_dict(players))"""
         choice, player_id = PlayerView.display_list(store["players"])
 
         if choice == "1":
@@ -33,6 +37,7 @@ class PlayerController:
 
         # we add the player to the store
         store["players"].append(player)
+        #Database.save(store, player)
 
         return "list_player", None
 

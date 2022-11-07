@@ -39,7 +39,7 @@ class Tournament:
                 ):
                     return True
 
-    def save_players_scores(self, winner, equality={}):
+    def save_players_scores(self, winner, loser, null):
         """
         Save players scores
 
@@ -47,12 +47,13 @@ class Tournament:
         - Winner : player_x.id
         - Equality : {player_1: player_1.id, player_2: player_2.id}
         """
-        if winner:
+        if null:
+            self.scores[null["player_1"]] = self.scores.get(null["player_1"], 0) + 0.5
+            self.scores[null["player_1"]] = self.scores.get(null["player_1"], 0) + 0.5
+        else : 
             self.scores[winner] = self.scores.get(winner, 0) + 1
-        else:
-            self.scores[equality["player_1"]] = self.scores.get(winner, 0) + 0.5
-            self.scores[equality["player_2"]] = self.scores.get(winner, 0) + 0.5
-
+            self.scores[loser] = self.scores.get(loser, 0) + 0
+        
     def sort_by_rank(self):
         """
         Sort players by rank
@@ -132,6 +133,20 @@ class Tournament:
                     match_number += 1
 
         self.rounds.append(round)
+
+    def to_dict(self):
+        return {
+            "id" : self.id, 
+            "name" : self.name, 
+            "location": self.location, 
+            "date" : self.date, 
+            "time_control": self.time_control, 
+            "players": [player.id for player in self.players], 
+            "description": self.description, 
+            "nb_rounds": self.nb_rounds,
+            "rounds": [round.to_dict() for round in self.rounds],
+            "scores": self.scores
+        }
 
 
 """

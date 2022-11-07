@@ -1,3 +1,4 @@
+from multiprocessing.resource_tracker import ResourceTracker
 from chess.models.tournament import Tournament
 from chess.views.tournament_view import TournamentView
 
@@ -153,10 +154,31 @@ class TournamentController:
     @classmethod
     def save_scores(cls, store, route_params):
         match = route_params[0]
+        tournament = cls.get_tournament(store, route_params[1])
         
-        winner = TournamentView.save_scores(match)
+        choice = TournamentView.save_scores(match)
+        null = None
+        winner = None
+        loser = None
+
+        if choice == "1":
+            winner = match.player_1.id
+            loser = match.player_2.id
+            match.update_results([1,0])
+        elif choice == "2":
+            winner = match.player_2.id
+            loser = match.player_1.id
+            match.update_results([0,1])
+        elif choice == "3":
+            null = {"player_1": match.player_1.id, "player_2": match.player_2.id}
+            match.update_results([0.5,0.5])
+
+
         
-        Tournament.save_players_scores(winner)
+        tournament.save_players_scores(winner, loser, null)
+        
+
+        return "play_round", tournament.id
 
 
 

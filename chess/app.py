@@ -1,12 +1,12 @@
+from textwrap import indent
 from chess.controllers.home_controller import HomePageController
-from chess.controllers.match_controller import MatchController
-from chess.controllers.round_controller import RoundController
-
-from chess.models.player import Player
-from chess.models.tournament import Tournament
 from chess.controllers.player_controller import PlayerController
 from chess.controllers.tournament_controller import TournamentController
+from chess.models.player import Player
+from chess.models.tournament import Tournament
+from chess.models.database import Database
 import subprocess as sp
+from tinydb import TinyDB
 
 
 
@@ -34,7 +34,8 @@ class Application:
         self.route = "homepage"
         self.exit = False
         self.route_params = None
-        self.store = {
+        self.store = TinyDB("database.json")
+        """self.store = {
             "players": [
                 Player(1, "Player_1", "Player_1", "21-09-2022", "H"),
                 Player(2, "Player_2", "Player_2", "21-09-2022", "H"),
@@ -49,7 +50,7 @@ class Application:
                 Tournament(23, "Premier tournament", "Paris", "23/09/2022", "Blitz"),
                 Tournament(24, "Deuxième tournament", "Bordeaux", "24/09/2022", "Bullet",[Player(1, "Player_1", "Player_1", "21-09-2022", "H"),Player(2, "Player_2", "Player_2", "21-09-2022", "H"),Player(3, "Player_3", "Player_3", "21-09-2022", "H"),Player(4, "Player_4", "Player_4", "21-09-2022", "H"),Player(5, "Player_5", "Player_5", "21-09-2022", "H"),Player(6, "Player_6", "Player_6", "21-09-2022", "H"),Player(7, "Player_7", "Player_7", "21-09-2022", "H"),Player(8, "Player_8", "Player_8", "21-09-2022", "H")])
             ]
-        }
+        }"""
         
     def run(self):
         while not self.exit:
