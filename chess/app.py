@@ -2,9 +2,9 @@ from textwrap import indent
 from chess.controllers.home_controller import HomePageController
 from chess.controllers.player_controller import PlayerController
 from chess.controllers.tournament_controller import TournamentController
-from chess.models.player import Player
-from chess.models.tournament import Tournament
-from chess.models.database import Database
+# from chess.models.player import Player
+# from chess.models.tournament import Tournament
+from chess.models.store import Store
 import subprocess as sp
 from tinydb import TinyDB
 
@@ -34,7 +34,7 @@ class Application:
         self.route = "homepage"
         self.exit = False
         self.route_params = None
-        self.store = TinyDB("database.json")
+        self.store = Store()
         """self.store = {
             "players": [
                 Player(1, "Player_1", "Player_1", "21-09-2022", "H"),

@@ -43,14 +43,12 @@ class PlayerView:
     @classmethod
     def create_player(cls):
         print("New Player\n")
-        id = input("ID: ")
-        first_name = input("First Name")
-        last_name = input("Last Name")
+        id = int(input("ID: "))
+        first_name = input("First Name: ")
+        last_name = input("Last Name: ")
         date_of_birth = input("Date of birth (DD-MM-YYYY): ")
         sex = input("Sex (H or F): ")
         
-        print("Player added successful ! ")
-
         return {
             "id": id,
             "first_name": first_name,

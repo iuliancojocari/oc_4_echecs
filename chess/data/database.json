@@ -1,0 +1,67 @@
+{
+    "players": {
+        "1": {
+            "id": 1,
+            "first_name": "Player_1",
+            "last_name": "Player_1",
+            "date_of_birth": "01-01-2022",
+            "sex": "h",
+            "rank": 0
+        },
+        "2": {
+            "id": 2,
+            "first_name": "Player_2",
+            "last_name": "Player_2",
+            "date_of_birth": "01-01-2022",
+            "sex": "h",
+            "rank": 0
+        },
+        "3": {
+            "id": 3,
+            "first_name": "Player_3",
+            "last_name": "Player_3",
+            "date_of_birth": "01-01-2022",
+            "sex": "h",
+            "rank": 0
+        },
+        "4": {
+            "id": 4,
+            "first_name": "Player_4",
+            "last_name": "Player_4",
+            "date_of_birth": "01-01-2022",
+            "sex": "h",
+            "rank": 0
+        },
+        "5": {
+            "id": 5,
+            "first_name": "Player_5",
+            "last_name": "Player_5",
+            "date_of_birth": "01-01-2022",
+            "sex": "ds"
+        },
+        "6": {
+            "id": 6,
+            "first_name": "Player_6",
+            "last_name": "Player_6",
+            "date_of_birth": "01-01-2000",
+            "sex": "F",
+            "rank": 0
+        },
+        "7": {
+            "id": 7,
+            "first_name": "Player_7",
+            "last_name": "Player_7",
+            "date_of_birth": "01-01-2000",
+            "sex": "F",
+            "rank": 0
+        },
+        "8": {
+            "id": 8,
+            "first_name": "Player_8",
+            "last_name": "Player_8",
+            "date_of_birth": "01-01-2000",
+            "sex": "F",
+            "rank": 0
+        }
+    }
+}

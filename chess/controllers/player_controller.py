@@ -1,16 +1,13 @@
 from chess.models.player import Player
 from chess.views.player_view import PlayerView
-from chess.models.database import Database
+from chess.models.store import Store 
 
 
 class PlayerController:
 
     @classmethod
     def list(cls, store, route_params=None):
-        """table = store.table("players")
-        players = table.all()
-        choice, player_id = PlayerView.display_list(Player.from_dict(players))"""
-        choice, player_id = PlayerView.display_list(store["players"])
+        choice, player_id = PlayerView.display_list(store.get_players())
 
         if choice == "1":
             return "new_player", None
@@ -33,13 +30,14 @@ class PlayerController:
         # You could specify each argument like:
         # player = Player(id=data["id"], name=data["name"], age=data["age"])
         # but it's easier to use `**` to pass the arguments
-        player = Player(**data)
+        #player = Player(**data)
 
         # we add the player to the store
-        store["players"].append(player)
+        #store["players"].append(player)
         #Database.save(store, player)
+        store.save("players", Player(**data).to_dict())
 
-        return "list_player", None
+        return "manage_players", None
 
     @classmethod
     def delete(cls, store, route_params):
