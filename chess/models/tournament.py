@@ -9,7 +9,7 @@ from chess.models.round import Round
 
 
 class Tournament:
-    def __init__(self, id, name, location, date, time_control, players=[], description=""):
+    def __init__(self, id, name, location, date, time_control, players=[], description="", nb_rounds=4, rounds=[], scores={}):
         self.id = id
         self.name = name
         self.location = location
@@ -17,9 +17,9 @@ class Tournament:
         self.time_control = time_control
         self.description = description
         self.players = players
-        self.nb_rounds = 4
-        self.rounds = []
-        self.scores = {}  # {"1": 2, "2": 4}
+        self.nb_rounds = nb_rounds
+        self.rounds = rounds
+        self.scores = scores  # {"1": 2, "2": 4}
 
     def has_played(self, player_1, player_2):
         """
@@ -141,100 +141,33 @@ class Tournament:
             "location": self.location, 
             "date" : self.date, 
             "time_control": self.time_control, 
-            "players": [player.id for player in self.players], 
+            "players": [], 
             "description": self.description, 
             "nb_rounds": self.nb_rounds,
-            "rounds": [round.to_dict() for round in self.rounds],
+            "rounds": [],
             "scores": self.scores
         }
 
 
-"""
-tournament = Tournament("1", "Premier", "Paris", "01-01-2022", "Bullet")
-tournament.players = [
-                Player(1, "Player_1", "Player_1", "21-09-2022", "H", rank=1),
-                Player(2, "Player_2", "Player_2", "21-09-2022", "H", rank=2),
-                Player(3, "Player_3", "Player_3", "21-09-2022", "H", rank=4),
-                Player(4, "Player_4", "Player_4", "21-09-2022", "H", rank=7),
-                Player(5, "Player_5", "Player_5", "21-09-2022", "H", rank=1),
-                Player(6, "Player_6", "Player_6", "21-09-2022", "H", rank=5),
-                Player(7, "Player_7", "Player_7", "21-09-2022", "H", rank=3),
-                Player(8, "Player_8", "Player_8", "21-09-2022", "H", rank=2),
-]
-tournament.create_round(round_number=1)
-print("Round 1")
-print(f"{tournament.rounds[0].matches[0].player_1.first_name} - color : {tournament.rounds[0].matches[0].player_1._color}")
-print(f"{tournament.rounds[0].matches[0].player_2.first_name} - color : {tournament.rounds[0].matches[0].player_2._color}")
-print()
-print(tournament.rounds[0].matches[1].player_1.first_name)
-print(tournament.rounds[0].matches[1].player_2.first_name)
-print()
-print(tournament.rounds[0].matches[2].player_1.first_name)
-print(tournament.rounds[0].matches[2].player_2.first_name)
-print()
-print(tournament.rounds[0].matches[3].player_1.first_name)
-print(tournament.rounds[0].matches[3].player_2.first_name)
-
-print()
-
-tournament.save_players_scores(None, {"player_1": tournament.rounds[0].matches[0].player_1.id, "player_2": tournament.rounds[0].matches[0].player_2.id})
-tournament.save_players_scores(None, {"player_1": tournament.rounds[0].matches[1].player_1.id, "player_2": tournament.rounds[0].matches[1].player_2.id})
-tournament.save_players_scores(None, {"player_1": tournament.rounds[0].matches[2].player_1.id, "player_2": tournament.rounds[0].matches[2].player_2.id})
-tournament.save_players_scores(None, {"player_1": tournament.rounds[0].matches[3].player_1.id, "player_2": tournament.rounds[0].matches[3].player_2.id})
+    @classmethod
+    def from_dict(cls, tournament_dict):
+        return cls(**tournament_dict)
 
 
-tournament.create_round(round_number=2)
-#print("Round 2")
-#print(tournament.rounds[1].matches[0].player_1.__dict__)
-#print(tournament.rounds[1].matches[0].player_2.__dict__)
-#print()
-#print(tournament.rounds[1].matches[1].player_1.__dict__)
-#print(tournament.rounds[1].matches[1].player_2.__dict__)
-#print()
-#print(tournament.rounds[1].matches[2].player_1.__dict__)
-#print(tournament.rounds[1].matches[2].player_2.__dict__)
-#print()
-#print(tournament.rounds[1].matches[3].player_1.__dict__)
-#print(tournament.rounds[1].matches[3].player_2.__dict__)
-#print()
-tournament.save_players_scores(tournament.rounds[1].matches[0].player_1.id)
-tournament.save_players_scores(tournament.rounds[1].matches[1].player_2.id)
-tournament.save_players_scores(tournament.rounds[1].matches[2].player_1.id)
-tournament.save_players_scores(tournament.rounds[1].matches[3].player_2.id)
-#print()
-tournament.create_round(round_number=3)
-#print("Round 3")
-#print(tournament.rounds[2].matches[0].player_1.__dict__)
-#print(tournament.rounds[2].matches[0].player_2.__dict__)
-#print()
-#print(tournament.rounds[2].matches[1].player_1.__dict__)
-#print(tournament.rounds[2].matches[1].player_2.__dict__)
-#print()
-#print(tournament.rounds[2].matches[2].player_1.__dict__)
-#print(tournament.rounds[2].matches[2].player_2.__dict__)
-#print()
-#print(tournament.rounds[2].matches[3].player_1.__dict__)
-#print(tournament.rounds[2].matches[3].player_2.__dict__)
-tournament.save_players_scores(tournament.rounds[2].matches[0].player_1.id)
-tournament.save_players_scores(tournament.rounds[2].matches[1].player_2.id)
-tournament.save_players_scores(tournament.rounds[2].matches[2].player_1.id)
-tournament.save_players_scores(tournament.rounds[2].matches[3].player_2.id)
-#print()
-tournament.create_round(round_number=3)
-#print("Round 4")
-#print(tournament.rounds[3].matches[0].player_1.__dict__)
-#print(tournament.rounds[3].matches[0].player_2.__dict__)
-#print()
-#print(tournament.rounds[3].matches[1].player_1.__dict__)
-#print(tournament.rounds[3].matches[1].player_2.__dict__)
-#print()
-#print(tournament.rounds[3].matches[2].player_1.__dict__)
-#print(tournament.rounds[3].matches[2].player_2.__dict__)
-#print()
-#print(tournament.rounds[3].matches[3].player_1.__dict__)
-#print(tournament.rounds[3].matches[3].player_2.__dict__)
-tournament.save_players_scores(tournament.rounds[3].matches[0].player_1.id)
-tournament.save_players_scores(tournament.rounds[3].matches[1].player_2.id)
-tournament.save_players_scores(tournament.rounds[3].matches[2].player_1.id)
-tournament.save_players_scores(tournament.rounds[3].matches[3].player_2.id)
+
+
+
+"""def to_dict(self):
+return {
+    "id" : self.id, 
+    "name" : self.name, 
+    "location": self.location, 
+    "date" : self.date, 
+    "time_control": self.time_control, 
+    "players": [player.id for player in self.players], 
+    "description": self.description, 
+    "nb_rounds": self.nb_rounds,
+    "rounds": [round.to_dict() for round in self.rounds],
+    "scores": self.scores
+}
 """

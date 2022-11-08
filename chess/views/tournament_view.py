@@ -12,10 +12,13 @@ class TournamentView:
                 f"{tournament.id}\t{tournament.name}\t{tournament.location}\t{tournament.date}"
             )
 
-        print("\n1. New tournament")
-        print("2. Load tournament")
-        print("3. Edit tournament")
-        print("4. Delete tournament\n")
+        if len(tournaments) == 0:
+            print("\n1. New tournament")
+        else:
+            print("\n1. New tournament")    
+            print("2. Load tournament")
+            print("3. Edit tournament")
+            print("4. Delete tournament\n")
         print("H. Homepage")
         print("Q. Exit\n")
 

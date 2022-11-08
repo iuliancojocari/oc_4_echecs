@@ -42,29 +42,22 @@ class PlayerController:
     @classmethod
     def delete(cls, store, route_params):
         # remove the player from the store
-        store["players"] = [
-            p for p in store["players"] if p.id != route_params
-        ]
+        store.delete(id=route_params, table="players")
+        
         return "manage_players", None
 
     @classmethod
     def update(cls, store, route_params):
         """
         Update player information
-
-        Attributes : 
-        -   store : the list of players
-        -   route_params : the player ID
         """
 
         player_id = route_params
+    
+        data = PlayerView.update_player()
+        
+        store.edit(id=player_id, dict=Player(player_id,**data).to_dict(), table="players")
 
-        for index, object in enumerate(store["players"]):
-            if object.id == player_id:
-                data = PlayerView.update_player()
-                store["players"][index] = Player(player_id, **data)
-            else: 
-                raise Exception(f"Player {player_id} not found")
             
         return "manage_players", None
 

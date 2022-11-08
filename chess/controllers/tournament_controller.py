@@ -21,7 +21,7 @@ class TournamentController:
             Returns the next route
         """
 
-        choice, tournament_id = TournamentView.display_list(store["tournaments"])
+        choice, tournament_id = TournamentView.display_list(store.get_tournaments())
 
         if choice == "1":
             return "new_tournament", None
@@ -51,15 +51,16 @@ class TournamentController:
             Return the next route -> manage_tournaments
         """
         data = TournamentView.create_tournament()
-        tournament = Tournament(**data)
-        store["tournaments"].append(tournament)
+
+        store.save(table="tournaments", item=Tournament(**data).to_dict())
 
         return "manage_tournaments", None
 
     
     @classmethod
     def load(cls, store, route_params):
-        tournament = next(t for t in store["tournaments"] if t.id == route_params)
+        tournament = store.load_tournament(route_params)
+        
         choice = TournamentView.load_tournament(tournament)
 
 
@@ -78,7 +79,8 @@ class TournamentController:
     @classmethod
     def players(cls, store, route_params):
         # route_params = tournament.id
-        tournament = cls.get_tournament(store, route_params)
+        tournament = store.load_tournament(route_params)
+
         total_players = len(tournament.players)
 
         print(f"Tournament players -> {total_players}\n")
@@ -90,8 +92,8 @@ class TournamentController:
 
         nb_player = 1
         while total_players < 8:
-            player_id = TournamentView.add_players(store["players"])
-            player = next(p for p in store["players"] if p.id == int(player_id))
+            player_id = TournamentView.add_players(store.get_players())
+            player = next(p for p in store.get_players() if p.id == int(player_id))
             tournament.players.append(player)
             total_players = len(tournament.players)
             nb_player += 1

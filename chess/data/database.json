@@ -63,5 +63,19 @@
             "sex": "F",
             "rank": 0
         }
+    },
+    "tournaments": {
+        "1": {
+            "id": "1",
+            "name": "First Tournament",
+            "location": "Paris",
+            "date": "02-02-2022",
+            "time_control": "Blitz",
+            "players": [],
+            "description": "First Tournament",
+            "nb_rounds": 4,
+            "rounds": [],
+            "scores": {}
+        }
     }
 }
