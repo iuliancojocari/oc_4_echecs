@@ -19,7 +19,6 @@ class Player:
 
     @classmethod
     def from_dict(cls, player_dict):
-
         return cls(**player_dict)        
         
 

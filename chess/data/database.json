@@ -66,16 +66,289 @@
     },
     "tournaments": {
         "1": {
-            "id": "1",
+            "id": 1,
             "name": "First Tournament",
             "location": "Paris",
             "date": "02-02-2022",
             "time_control": "Blitz",
-            "players": [],
+            "players": [
+                {
+                    "id": 1,
+                    "first_name": "Player_1",
+                    "last_name": "Player_1",
+                    "date_of_birth": "01-01-2022",
+                    "sex": "h",
+                    "rank": 0
+                },
+                {
+                    "id": 2,
+                    "first_name": "Player_2",
+                    "last_name": "Player_2",
+                    "date_of_birth": "01-01-2022",
+                    "sex": "h",
+                    "rank": 0
+                },
+                {
+                    "id": 3,
+                    "first_name": "Player_3",
+                    "last_name": "Player_3",
+                    "date_of_birth": "01-01-2022",
+                    "sex": "h",
+                    "rank": 0
+                },
+                {
+                    "id": 4,
+                    "first_name": "Player_4",
+                    "last_name": "Player_4",
+                    "date_of_birth": "01-01-2022",
+                    "sex": "h",
+                    "rank": 0
+                },
+                {
+                    "id": 5,
+                    "first_name": "Player_5",
+                    "last_name": "Player_5",
+                    "date_of_birth": "01-01-2022",
+                    "sex": "ds",
+                    "rank": 0
+                },
+                {
+                    "id": 6,
+                    "first_name": "Player_6",
+                    "last_name": "Player_6",
+                    "date_of_birth": "01-01-2000",
+                    "sex": "F",
+                    "rank": 0
+                },
+                {
+                    "id": 7,
+                    "first_name": "Player_7",
+                    "last_name": "Player_7",
+                    "date_of_birth": "01-01-2000",
+                    "sex": "F",
+                    "rank": 0
+                },
+                {
+                    "id": 8,
+                    "first_name": "Player_8",
+                    "last_name": "Player_8",
+                    "date_of_birth": "01-01-2000",
+                    "sex": "F",
+                    "rank": 0
+                }
+            ],
             "description": "First Tournament",
+            "nb_rounds": 4,
+            "rounds": [
+                {
+                    "name": "Round 1",
+                    "start_date": "09-11-2022-22:28",
+                    "end_date": "",
+                    "matches": [
+                        {
+                            "name": "Match 1",
+                            "player_1": {
+                                "id": 1,
+                                "first_name": "Player_1",
+                                "last_name": "Player_1",
+                                "date_of_birth": "01-01-2022",
+                                "sex": "h",
+                                "rank": 0
+                            },
+                            "player_2": {
+                                "id": 5,
+                                "first_name": "Player_5",
+                                "last_name": "Player_5",
+                                "date_of_birth": "01-01-2022",
+                                "sex": "ds",
+                                "rank": 0
+                            },
+                            "player_1_color": "Black",
+                            "player_2_color": "White",
+                            "results": []
+                        },
+                        {
+                            "name": "Match 2",
+                            "player_1": {
+                                "id": 2,
+                                "first_name": "Player_2",
+                                "last_name": "Player_2",
+                                "date_of_birth": "01-01-2022",
+                                "sex": "h",
+                                "rank": 0
+                            },
+                            "player_2": {
+                                "id": 6,
+                                "first_name": "Player_6",
+                                "last_name": "Player_6",
+                                "date_of_birth": "01-01-2000",
+                                "sex": "F",
+                                "rank": 0
+                            },
+                            "player_1_color": "White",
+                            "player_2_color": "Black",
+                            "results": []
+                        },
+                        {
+                            "name": "Match 3",
+                            "player_1": {
+                                "id": 3,
+                                "first_name": "Player_3",
+                                "last_name": "Player_3",
+                                "date_of_birth": "01-01-2022",
+                                "sex": "h",
+                                "rank": 0
+                            },
+                            "player_2": {
+                                "id": 7,
+                                "first_name": "Player_7",
+                                "last_name": "Player_7",
+                                "date_of_birth": "01-01-2000",
+                                "sex": "F",
+                                "rank": 0
+                            },
+                            "player_1_color": "White",
+                            "player_2_color": "Black",
+                            "results": []
+                        },
+                        {
+                            "name": "Match 4",
+                            "player_1": {
+                                "id": 4,
+                                "first_name": "Player_4",
+                                "last_name": "Player_4",
+                                "date_of_birth": "01-01-2022",
+                                "sex": "h",
+                                "rank": 0
+                            },
+                            "player_2": {
+                                "id": 8,
+                                "first_name": "Player_8",
+                                "last_name": "Player_8",
+                                "date_of_birth": "01-01-2000",
+                                "sex": "F",
+                                "rank": 0
+                            },
+                            "player_1_color": "White",
+                            "player_2_color": "Black",
+                            "results": []
+                        }
+                    ]
+                },
+                {
+                    "name": "Round 2",
+                    "start_date": "09-11-2022-22:29",
+                    "end_date": "",
+                    "matches": [
+                        {
+                            "name": "Match 1",
+                            "player_1": {
+                                "id": 1,
+                                "first_name": "Player_1",
+                                "last_name": "Player_1",
+                                "date_of_birth": "01-01-2022",
+                                "sex": "h",
+                                "rank": 0
+                            },
+                            "player_2": {
+                                "id": 2,
+                                "first_name": "Player_2",
+                                "last_name": "Player_2",
+                                "date_of_birth": "01-01-2022",
+                                "sex": "h",
+                                "rank": 0
+                            },
+                            "player_1_color": "Black",
+                            "player_2_color": "White",
+                            "results": []
+                        },
+                        {
+                            "name": "Match 2",
+                            "player_1": {
+                                "id": 3,
+                                "first_name": "Player_3",
+                                "last_name": "Player_3",
+                                "date_of_birth": "01-01-2022",
+                                "sex": "h",
+                                "rank": 0
+                            },
+                            "player_2": {
+                                "id": 4,
+                                "first_name": "Player_4",
+                                "last_name": "Player_4",
+                                "date_of_birth": "01-01-2022",
+                                "sex": "h",
+                                "rank": 0
+                            },
+                            "player_1_color": "White",
+                            "player_2_color": "Black",
+                            "results": []
+                        },
+                        {
+                            "name": "Match 3",
+                            "player_1": {
+                                "id": 5,
+                                "first_name": "Player_5",
+                                "last_name": "Player_5",
+                                "date_of_birth": "01-01-2022",
+                                "sex": "ds",
+                                "rank": 0
+                            },
+                            "player_2": {
+                                "id": 6,
+                                "first_name": "Player_6",
+                                "last_name": "Player_6",
+                                "date_of_birth": "01-01-2000",
+                                "sex": "F",
+                                "rank": 0
+                            },
+                            "player_1_color": "White",
+                            "player_2_color": "Black",
+                            "results": []
+                        },
+                        {
+                            "name": "Match 4",
+                            "player_1": {
+                                "id": 7,
+                                "first_name": "Player_7",
+                                "last_name": "Player_7",
+                                "date_of_birth": "01-01-2000",
+                                "sex": "F",
+                                "rank": 0
+                            },
+                            "player_2": {
+                                "id": 8,
+                                "first_name": "Player_8",
+                                "last_name": "Player_8",
+                                "date_of_birth": "01-01-2000",
+                                "sex": "F",
+                                "rank": 0
+                            },
+                            "player_1_color": "Black",
+                            "player_2_color": "White",
+                            "results": []
+                        }
+                    ]
+                }
+            ],
+            "scores": {
+                
+            }
+            
+        },
+        "2": {
+            "id": 2,
+            "name": "de",
+            "location": "e",
+            "date": "de",
+            "time_control": "Blitz",
+            "players": [],
+            "description": "de",
             "nb_rounds": 4,
             "rounds": [],
             "scores": {}
         }
+    
+        
     }
 }

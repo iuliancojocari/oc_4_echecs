@@ -1,12 +1,7 @@
 from chess.controllers.timestamp import get_timestamp
 from chess.models.match import Match
 from chess.models.round import Round
-
-# from match import Match
-# from round import Round
-# from timestamp import get_timestamp
-# from player import Player
-
+from chess.models.player import Player
 
 class Tournament:
     def __init__(self, id, name, location, date, time_control, players=[], description="", nb_rounds=4, rounds=[], scores={}):
@@ -49,10 +44,13 @@ class Tournament:
         """
         if null:
             self.scores[null["player_1"]] = self.scores.get(null["player_1"], 0) + 0.5
-            self.scores[null["player_1"]] = self.scores.get(null["player_1"], 0) + 0.5
+            self.scores[null["player_2"]] = self.scores.get(null["player_2"], 0) + 0.5
         else : 
-            self.scores[winner] = self.scores.get(winner, 0) + 1
-            self.scores[loser] = self.scores.get(loser, 0) + 0
+            self.scores[str(winner)] = self.scores.get(winner, 0) + 1
+            self.scores[str(loser)] = self.scores.get(loser, 0) + 0
+
+
+        return self.scores
         
     def sort_by_rank(self):
         """
@@ -132,7 +130,8 @@ class Tournament:
                     round.matches.append(match)
                     match_number += 1
 
-        self.rounds.append(round)
+        return round
+        
 
     def to_dict(self):
         return {
@@ -141,33 +140,24 @@ class Tournament:
             "location": self.location, 
             "date" : self.date, 
             "time_control": self.time_control, 
-            "players": [], 
+            "players": self.players, 
             "description": self.description, 
             "nb_rounds": self.nb_rounds,
-            "rounds": [],
+            "rounds": [round.to_dict() for round in self.rounds],
             "scores": self.scores
         }
-
-
     @classmethod
-    def from_dict(cls, tournament_dict):
-        return cls(**tournament_dict)
+    def from_dict(cls, dict):
+        return cls(**{
+            "id": dict["id"],
+            "name": dict["name"],
+            "location": dict["location"],
+            "date": dict["date"],
+            "time_control": dict["time_control"],
+            "players": [Player.from_dict(player) for player in dict["players"]],
+            "description": dict["description"],
+            "nb_rounds": dict["nb_rounds"],
+            "rounds": [Round.from_dict(round) for round in dict["rounds"]],
+            "scores": dict["scores"]
+        })
 
-
-
-
-
-"""def to_dict(self):
-return {
-    "id" : self.id, 
-    "name" : self.name, 
-    "location": self.location, 
-    "date" : self.date, 
-    "time_control": self.time_control, 
-    "players": [player.id for player in self.players], 
-    "description": self.description, 
-    "nb_rounds": self.nb_rounds,
-    "rounds": [round.to_dict() for round in self.rounds],
-    "scores": self.scores
-}
-"""

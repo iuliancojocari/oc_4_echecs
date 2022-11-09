@@ -1,4 +1,6 @@
-from tinydb import TinyDB
+import os
+from tinydb import TinyDB, Query
+from tinydb.operations import add
 from chess.models.tournament import Tournament
 from chess.utils.constants import DB_PATH
 from chess.models.player import Player
@@ -14,7 +16,20 @@ class Store:
     
     @classmethod
     def edit(cls, id, dict, table):
-        return cls.db.table(table).update(dict, doc_ids=[id])
+        Object = Query()
+        return cls.db.table(table).upsert(dict, Object.id == id)
+
+    @classmethod
+    def add_players(cls, id, dict, table):
+        Object = Query()
+        
+        return cls.db.table(table).update(add("players", [dict]), Object.id == id)
+
+    @classmethod
+    def save_round(cls, id, dict, table):
+        Object = Query()
+
+        return cls.db.table(table).update(add("rounds", [dict]), Object.id == id)
 
     @classmethod
     def delete(cls, id, table):
@@ -56,38 +71,21 @@ class Store:
 
     @classmethod
     def load_tournament(cls, id):
-        tournament_data = cls.db.table("tournaments").get(doc_id=id)
-
-        """tournament = Tournament(
-            id = tournament_data["id"],
-            name = tournament_data["name"],
-            location = tournament_data["location"],
-            date = tournament_data["date"],
-            time_control = tournament_data["time_control"],
-            players = tournament_data["players"],
-            description = tournament_data["description"],
-            nb_rounds = tournament_data["nb_rounds"],
-            rounds = tournament_data["rounds"],
-            scores = tournament_data["scores"]
-        )"""
-
-        tournament = {
-            "id": tournament_data["id"],
-            "name": tournament_data["name"],
-            "location": tournament_data["location"],
-            "date": tournament_data["date"],
-            "time_control": tournament_data["time_control"],
-            "players": tournament_data["players"],
-            "description": tournament_data["description"],
-            "nb_rounds": tournament_data["nb_rounds"],
-            "rounds": tournament_data["rounds"],
-            "scores": tournament_data["scores"]
-        }
-
+        Object = Query()
+        tournament = cls.db.table("tournaments").get(Object.id == id)
 
         return Tournament.from_dict(tournament)
-    
-    
+        
+        
+    @classmethod
+    def save_winner_score(cls, id, table, dict):
+        Object = Query()
+        return cls.db.table(table).upsert({"scores": dict}, Object.id == id)
+        
 
-    
+    @classmethod
+    def save_results(cls, id, name, table, dict):
+        Object = Query()
+
+        return cls.db.table(table).upsert({"results": dict}, ((Object.id == id) and (Object.name == name)))
          

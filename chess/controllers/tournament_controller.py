@@ -1,4 +1,5 @@
 from multiprocessing.resource_tracker import ResourceTracker
+from chess.models.player import Player
 from chess.models.tournament import Tournament
 from chess.views.tournament_view import TournamentView
 
@@ -80,7 +81,6 @@ class TournamentController:
     def players(cls, store, route_params):
         # route_params = tournament.id
         tournament = store.load_tournament(route_params)
-
         total_players = len(tournament.players)
 
         print(f"Tournament players -> {total_players}\n")
@@ -94,8 +94,9 @@ class TournamentController:
         while total_players < 8:
             player_id = TournamentView.add_players(store.get_players())
             player = next(p for p in store.get_players() if p.id == int(player_id))
-            tournament.players.append(player)
-            total_players = len(tournament.players)
+            store.add_players(id=tournament.id, dict=player.to_dict(), table="tournaments")
+
+            total_players += 1
             nb_player += 1
 
         return "manage_tournaments", None
@@ -126,12 +127,14 @@ class TournamentController:
     def play_tournament(cls, store, route_params):
         # route_params -> tournament id
         # initiate the tournament
-        tournament = cls.get_tournament(store, route_params)
+        tournament = store.load_tournament(route_params)
+
         round = len(tournament.rounds) + 1
         while round <= tournament.nb_rounds:
-            tournament.create_round(round)
+            r = tournament.create_round(round)
+            store.save_round(id=tournament.id, dict=r.to_dict(), table="tournaments")
 
-            choice = TournamentView.play_tournament(tournament)
+            choice = TournamentView.play_tournament(store.load_tournament(route_params))
 
             if choice == "1":
                 return "play_round", tournament.id
@@ -144,7 +147,7 @@ class TournamentController:
                  
     @classmethod
     def play_round(cls, store, route_params):
-        tournament = cls.get_tournament(store, route_params)
+        tournament = store.load_tournament(route_params)
 
         choice, match = TournamentView.play_round(tournament)
 
@@ -156,7 +159,7 @@ class TournamentController:
     @classmethod
     def save_scores(cls, store, route_params):
         match = route_params[0]
-        tournament = cls.get_tournament(store, route_params[1])
+        tournament = store.load_tournament(route_params[1])
         
         choice = TournamentView.save_scores(match)
         null = None
@@ -166,19 +169,21 @@ class TournamentController:
         if choice == "1":
             winner = match.player_1.id
             loser = match.player_2.id
-            match.update_results([1,0])
+            store.save_results(tournament.id,match.name, "tournaments", match.update_results([1,0]))
         elif choice == "2":
             winner = match.player_2.id
             loser = match.player_1.id
-            match.update_results([0,1])
+            store.save_results(tournament.id,match.name, "tournaments", match.update_results([0,1]))
         elif choice == "3":
             null = {"player_1": match.player_1.id, "player_2": match.player_2.id}
-            match.update_results([0.5,0.5])
+            store.save_results(tournament.id, match.name, "tournaments", match.update_results([0.5,0.5]))
+
 
 
         
-        tournament.save_players_scores(winner, loser, null)
-        
+        scores = tournament.save_players_scores(winner, loser, null)
+        print(type(scores))
+        store.save_winner_score(tournament.id, "tournaments", scores)
 
         return "play_round", tournament.id
 

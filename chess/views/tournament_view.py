@@ -145,7 +145,7 @@ class TournamentView:
         print(f"{round.name}:")
         for match in round.matches:
             print(
-                f"# {match.name} - {match.player_1.first_name} {match.player_1.last_name} vs {match.player_2.first_name} {match.player_2.last_name} - {match.results} 1"
+                f"# {match.name} - {match.player_1.first_name} {match.player_1.last_name} vs {match.player_2.first_name} {match.player_2.last_name} - {match.results}"
             )
         print("")
         # show options
