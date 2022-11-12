@@ -42,16 +42,15 @@ class Tournament:
         - Winner : player_x.id
         - Equality : {player_1: player_1.id, player_2: player_2.id}
         """
+
         if null:
             self.scores[null["player_1"]] = self.scores.get(null["player_1"], 0) + 0.5
             self.scores[null["player_2"]] = self.scores.get(null["player_2"], 0) + 0.5
         else : 
-            self.scores[str(winner)] = self.scores.get(winner, 0) + 1
-            self.scores[str(loser)] = self.scores.get(loser, 0) + 0
+            self.scores[str(winner)] = self.scores.get(str(winner), 0) + 1
+            self.scores[str(loser)] = self.scores.get(str(loser), 0) + 0
 
 
-        return self.scores
-        
     def sort_by_rank(self):
         """
         Sort players by rank
@@ -63,7 +62,7 @@ class Tournament:
         Sort players by score
         """
         for player in self.players:
-            player._score = self.scores.get(player.id, 0)
+            player._score = self.scores.get(str(player.id), 0)
 
         self.players.sort(key=lambda p: p._score, reverse=True)
 
@@ -93,6 +92,7 @@ class Tournament:
     def create_round(self, round_number):
         start_date = get_timestamp()
         round = Round("Round " + str(round_number), start_date)
+        round.matches = []
 
         match_number = 1
         if round_number == 1:
@@ -111,7 +111,9 @@ class Tournament:
                 match_number += 1
         else:
             self.sort_players_by_score()
+            print([p.first_name for p in self.players])
             self.sort_by_rank_players_with_same_score()
+
 
             available_players = [p for p in self.players]
 
@@ -121,16 +123,18 @@ class Tournament:
                     if not self.has_played(current_player, player):
                         match = Match(f"Match {match_number}", current_player, player)
                         round.matches.append(match)
+
                         available_players.pop(i)
                         match_number += 1
                         break
+                    
                 else:
                     next_player = available_players.pop(0)
                     match = Match(f"Match {match_number}", current_player, next_player)
                     round.matches.append(match)
                     match_number += 1
 
-        return round
+        self.rounds.append(round)
         
 
     def to_dict(self):
@@ -140,24 +144,24 @@ class Tournament:
             "location": self.location, 
             "date" : self.date, 
             "time_control": self.time_control, 
-            "players": self.players, 
+            "players": [player.id for player in self.players], 
             "description": self.description, 
             "nb_rounds": self.nb_rounds,
             "rounds": [round.to_dict() for round in self.rounds],
             "scores": self.scores
         }
     @classmethod
-    def from_dict(cls, dict):
+    def from_dict(cls, store, dict):
         return cls(**{
             "id": dict["id"],
             "name": dict["name"],
             "location": dict["location"],
             "date": dict["date"],
             "time_control": dict["time_control"],
-            "players": [Player.from_dict(player) for player in dict["players"]],
+            "players": [store.get_player_by_id(player) for player in dict["players"]],
             "description": dict["description"],
             "nb_rounds": dict["nb_rounds"],
-            "rounds": [Round.from_dict(round) for round in dict["rounds"]],
+            "rounds": [Round.from_dict(store, round) for round in dict["rounds"]],
             "scores": dict["scores"]
         })
 

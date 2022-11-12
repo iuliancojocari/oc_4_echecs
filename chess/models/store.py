@@ -1,4 +1,3 @@
-import os
 from tinydb import TinyDB, Query
 from tinydb.operations import add
 from chess.models.tournament import Tournament
@@ -13,6 +12,10 @@ class Store:
     @classmethod
     def save(cls, table, item):
         cls.db.table(table).insert(item)
+
+    @classmethod
+    def update_tournament_info(cls, id, table, dict):
+        cls.db.table(table).upsert(dict, Query().id == id)
     
     @classmethod
     def edit(cls, id, dict, table):
@@ -54,6 +57,11 @@ class Store:
             return players_list
 
     @classmethod
+    def get_player_by_id(cls, id):
+        player = cls.db.table("players").get(Query().id == id)
+        return Player.from_dict(player)
+
+    @classmethod
     def get_tournaments(cls):
         tournaments = cls.db.table("tournaments").all()
 
@@ -63,7 +71,7 @@ class Store:
             tournaments_list = []
 
             for tournament in tournaments:
-                t = Tournament.from_dict(tournament)
+                t = Tournament.from_dict(store=cls, dict=tournament)
 
                 tournaments_list.append(t)
 
@@ -74,7 +82,7 @@ class Store:
         Object = Query()
         tournament = cls.db.table("tournaments").get(Object.id == id)
 
-        return Tournament.from_dict(tournament)
+        return Tournament.from_dict(store=cls, dict=tournament)
         
         
     @classmethod

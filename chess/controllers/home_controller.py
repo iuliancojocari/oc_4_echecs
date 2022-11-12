@@ -4,7 +4,7 @@ from chess.views.home_view import HomeView
 class HomePageController:
 
     @classmethod
-    def dispatch(cls, store=None, input=None):
+    def dispatch(cls, route_params=None):
         choice = HomeView.home()
         if choice.lower() == "q":
             next = "quit"

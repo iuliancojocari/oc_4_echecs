@@ -34,23 +34,7 @@ class Application:
         self.route = "homepage"
         self.exit = False
         self.route_params = None
-        self.store = Store()
-        """self.store = {
-            "players": [
-                Player(1, "Player_1", "Player_1", "21-09-2022", "H"),
-                Player(2, "Player_2", "Player_2", "21-09-2022", "H"),
-                Player(3, "Player_3", "Player_3", "21-09-2022", "H"),
-                Player(4, "Player_4", "Player_4", "21-09-2022", "H"),
-                Player(5, "Player_5", "Player_5", "21-09-2022", "H"),
-                Player(6, "Player_6", "Player_6", "21-09-2022", "H"),
-                Player(7, "Player_7", "Player_7", "21-09-2022", "H"),
-                Player(8, "Player_8", "Player_8", "21-09-2022", "H"),
-            ], 
-            "tournaments": [
-                Tournament(23, "Premier tournament", "Paris", "23/09/2022", "Blitz"),
-                Tournament(24, "Deuxième tournament", "Bordeaux", "24/09/2022", "Bullet",[Player(1, "Player_1", "Player_1", "21-09-2022", "H"),Player(2, "Player_2", "Player_2", "21-09-2022", "H"),Player(3, "Player_3", "Player_3", "21-09-2022", "H"),Player(4, "Player_4", "Player_4", "21-09-2022", "H"),Player(5, "Player_5", "Player_5", "21-09-2022", "H"),Player(6, "Player_6", "Player_6", "21-09-2022", "H"),Player(7, "Player_7", "Player_7", "21-09-2022", "H"),Player(8, "Player_8", "Player_8", "21-09-2022", "H")])
-            ]
-        }"""
+        
         
     def run(self):
         while not self.exit:
@@ -67,8 +51,7 @@ class Application:
             # Every controller should return two things:
             # - the next route to display
             # - the parameters needed for the next route
-            next_route, next_params = controller_method(
-                self.store, self.route_params
+            next_route, next_params = controller_method(self.route_params
             )
 
             # set the next route and input

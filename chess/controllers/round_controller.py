@@ -4,7 +4,7 @@ from chess.views.round_view import RoundView
 class RoundController:
 
     @classmethod
-    def show_round(cls, store, route_params):
+    def show_round(cls, route_params):
         tournament = route_params
         choice, match = RoundView.show_round(tournament)
 

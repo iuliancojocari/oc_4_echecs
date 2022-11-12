@@ -119,7 +119,7 @@ class TournamentView:
             print(
                 f"\t{player.id}\t{player.first_name}\t{player.last_name}\t{player.rank}"
             )
-        # print(f"Rounds :")
+        
         for round in tournament.rounds:
             print(f"\n->{round.name}:")
 

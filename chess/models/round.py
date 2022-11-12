@@ -19,10 +19,10 @@ class Round:
         }
 
     @classmethod
-    def from_dict(cls, dict):
+    def from_dict(cls, store, dict):
         return cls(**{
             "name": dict["name"],
             "start_date": dict["start_date"],
             "end_date": dict["end_date"],
-            "matches": [Match.from_dict(match) for match in dict["matches"]]
+            "matches": [Match.from_dict(store, match) for match in dict["matches"]]
         })

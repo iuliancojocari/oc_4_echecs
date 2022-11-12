@@ -5,7 +5,7 @@ from chess.views.match_view import MatchView
 class MatchController:
 
     @classmethod
-    def save_score(cls, store, route_params):
+    def save_score(cls, route_params):
         match = route_params[1]
         tournament = route_params[0]
 

@@ -6,8 +6,8 @@ from chess.models.store import Store
 class PlayerController:
 
     @classmethod
-    def list(cls, store, route_params=None):
-        choice, player_id = PlayerView.display_list(store.get_players())
+    def list(cls, route_params=None):
+        choice, player_id = PlayerView.display_list(Store.get_players())
 
         if choice == "1":
             return "new_player", None
@@ -23,7 +23,7 @@ class PlayerController:
             raise Exception("invalid choice")
 
     @classmethod
-    def create(cls, store, route_params=None):
+    def create(cls, route_params=None):
         # call the view that will return us a dict with the new player info
         data = PlayerView.create_player()
 
@@ -35,19 +35,19 @@ class PlayerController:
         # we add the player to the store
         #store["players"].append(player)
         #Database.save(store, player)
-        store.save("players", Player(**data).to_dict())
+        Store.save("players", Player(**data).to_dict())
 
         return "manage_players", None
 
     @classmethod
-    def delete(cls, store, route_params):
+    def delete(cls, route_params):
         # remove the player from the store
-        store.delete(id=route_params, table="players")
+        Store.delete(id=route_params, table="players")
         
         return "manage_players", None
 
     @classmethod
-    def update(cls, store, route_params):
+    def update(cls, route_params):
         """
         Update player information
         """
@@ -56,7 +56,7 @@ class PlayerController:
     
         data = PlayerView.update_player()
         
-        store.edit(id=player_id, dict=Player(player_id,**data).to_dict(), table="players")
+        Store.edit(id=player_id, dict=Player(player_id,**data).to_dict(), table="players")
 
             
         return "manage_players", None
