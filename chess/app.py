@@ -23,9 +23,9 @@ class Application:
         "load_tournament": TournamentController.load,
         "update_tournament": TournamentController.update,
         "delete_tournament": TournamentController.delete,
-        "add_players": TournamentController.players,
+        "add_tournament_players": TournamentController.add_tournament_players,
         "play_tournament": TournamentController.play_tournament,
-        "save_scores": TournamentController.save_scores,
+        "save_scores_and_results": TournamentController.save_scores_and_results,
         "play_round": TournamentController.play_round
         
     }

@@ -1,7 +1,6 @@
 from chess.controllers.timestamp import get_timestamp
 from chess.models.match import Match
 from chess.models.round import Round
-from chess.models.player import Player
 
 class Tournament:
     def __init__(self, id, name, location, date, time_control, players=[], description="", nb_rounds=4, rounds=[], scores={}):
@@ -82,6 +81,9 @@ class Tournament:
         return players
 
     def sort_by_rank_players_with_same_score(self):
+        """
+        Sort players with the same score
+        """
         players = self.get_players_with_same_score()
         self.players = []
         for score, players_list in players.items():
@@ -90,12 +92,19 @@ class Tournament:
             )
 
     def create_round(self, round_number):
+        """
+        Create new round
+
+        Parameters:
+        - round_number : number of the new round to create
+        """
         start_date = get_timestamp()
         round = Round("Round " + str(round_number), start_date)
         round.matches = []
 
         match_number = 1
         if round_number == 1:
+            # for the 1st round we sort players by rank
             self.sort_by_rank()
 
             # split list in 2
@@ -110,10 +119,12 @@ class Tournament:
                 round.matches.append(match)
                 match_number += 1
         else:
+            # for the new rounds we sort players by score
+            # if multiple players have the same score
+            # we sort them by rank
             self.sort_players_by_score()
             print([p.first_name for p in self.players])
             self.sort_by_rank_players_with_same_score()
-
 
             available_players = [p for p in self.players]
 
@@ -136,8 +147,18 @@ class Tournament:
 
         self.rounds.append(round)
         
+    @classmethod
+    def set_round_end_date(cls, round):
+        """
+        At the end of each round, update the 
+        round end_date attribute
+        """
+        round.end_date = get_timestamp()
 
     def to_dict(self):
+        """
+        Serialize tournament object
+        """
         return {
             "id" : self.id, 
             "name" : self.name, 
@@ -152,6 +173,9 @@ class Tournament:
         }
     @classmethod
     def from_dict(cls, store, dict):
+        """
+        Deserialize tournament object
+        """
         return cls(**{
             "id": dict["id"],
             "name": dict["name"],

@@ -1,45 +1,65 @@
 from tinydb import TinyDB, Query
-from tinydb.operations import add
 from chess.models.tournament import Tournament
-from chess.utils.constants import DB_PATH
 from chess.models.player import Player
+from chess.utils.constants import DB_PATH
 
 
 class Store:
 
+    # initiate the database
     db = TinyDB(DB_PATH, indent=4)
 
     @classmethod
-    def save(cls, table, item):
-        cls.db.table(table).insert(item)
+    def save(cls, dict, table):
+        """
+        Save item in the database
+
+        Parameters:
+        - table : database table - players or tournaments
+        - dict: dictionnary to save into the database
+        """
+        return cls.db.table(table).insert(dict)
 
     @classmethod
     def update_tournament_info(cls, id, table, dict):
-        cls.db.table(table).upsert(dict, Query().id == id)
+        """
+        Update tournament info into the database
+
+        Parameters:
+        - id : tournament id
+        - table : tournaments database table
+        - dict : dictionnary to save into the database
+        """
+        return cls.db.table(table).upsert(dict, Query().id == id)
     
     @classmethod
     def edit(cls, id, dict, table):
-        Object = Query()
-        return cls.db.table(table).upsert(dict, Object.id == id)
+        """
+        Edit record into the database
 
-    @classmethod
-    def add_players(cls, id, dict, table):
-        Object = Query()
-        
-        return cls.db.table(table).update(add("players", [dict]), Object.id == id)
-
-    @classmethod
-    def save_round(cls, id, dict, table):
-        Object = Query()
-
-        return cls.db.table(table).update(add("rounds", [dict]), Object.id == id)
+        Parameters:
+        - id : object id to edit
+        - dict : the new edited dict to add into the database
+        - table : database table
+        """
+        return cls.db.table(table).upsert(dict, Query().id == id)
 
     @classmethod
     def delete(cls, id, table):
+        """
+        Delete record from the database
+
+        Parameters: 
+        - id : record id
+        - table : database table - tournaments or players
+        """
         return cls.db.table(table).remove(doc_ids=[id])
 
     @classmethod
     def get_players(cls):
+        """
+        Get all players
+        """
         players = cls.db.table("players").all()
 
         if len(players) == 0:
@@ -58,11 +78,20 @@ class Store:
 
     @classmethod
     def get_player_by_id(cls, id):
+        """
+        Get player by id
+
+        Parameters: 
+        - id : player id
+        """
         player = cls.db.table("players").get(Query().id == id)
         return Player.from_dict(player)
 
     @classmethod
     def get_tournaments(cls):
+        """
+        Get tournaments list
+        """
         tournaments = cls.db.table("tournaments").all()
 
         if len(tournaments) == 0:
@@ -78,22 +107,14 @@ class Store:
             return tournaments_list
 
     @classmethod
-    def load_tournament(cls, id):
-        Object = Query()
-        tournament = cls.db.table("tournaments").get(Object.id == id)
+    def get_tournament_by_id(cls, id):
+        """
+        Get tournament by id
+
+        Parameters:
+        - id : tournament id
+        """
+        tournament = cls.db.table("tournaments").get(Query().id == id)
 
         return Tournament.from_dict(store=cls, dict=tournament)
-        
-        
-    @classmethod
-    def save_winner_score(cls, id, table, dict):
-        Object = Query()
-        return cls.db.table(table).upsert({"scores": dict}, Object.id == id)
-        
-
-    @classmethod
-    def save_results(cls, id, name, table, dict):
-        Object = Query()
-
-        return cls.db.table(table).upsert({"results": dict}, ((Object.id == id) and (Object.name == name)))
          

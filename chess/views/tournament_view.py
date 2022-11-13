@@ -69,7 +69,12 @@ class TournamentView:
             print(f"\t{player.id}\t{player.first_name}\t{player.last_name}")
 
         if len(tournament.players) == 8:
-            print("\n1. Play tournament")
+            if len(tournament.rounds) == tournament.nb_rounds:
+                print("\nTournament finished !\n")
+            else:
+                print("\n1. Play tournament")
+        elif len(tournament.rounds) == tournament.nb_rounds:
+            print("Tournament finished !")
         else:
             print("\n1. Add player to the tournament")
         print("2. Manage tournaments")

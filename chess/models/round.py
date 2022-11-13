@@ -11,6 +11,9 @@ class Round:
     
 
     def to_dict(self):
+        """
+        Serialize round object
+        """
         return {
             "name": self.name,
             "start_date": self.start_date,
@@ -20,6 +23,9 @@ class Round:
 
     @classmethod
     def from_dict(cls, store, dict):
+        """
+        Deserialize round object
+        """
         return cls(**{
             "name": dict["name"],
             "start_date": dict["start_date"],

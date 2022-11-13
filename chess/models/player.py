@@ -8,6 +8,9 @@ class Player:
         self.rank = rank
 
     def to_dict(self):
+        """
+        Serialize player object
+        """
         return {
             "id": self.id,
             "first_name": self.first_name,
@@ -19,13 +22,16 @@ class Player:
 
     @classmethod
     def from_dict(cls, player_dict):
+        """
+        Deserialize player object
+        """
         return cls(**{
             "id": player_dict["id"],
             "first_name": player_dict["first_name"],
             "last_name": player_dict["last_name"],
             "date_of_birth": player_dict["date_of_birth"],
             "sex": player_dict["sex"],
-            "rank": player_dict["sex"]
+            "rank": player_dict["rank"]
         })        
         
 

@@ -7,6 +7,9 @@ class PlayerController:
 
     @classmethod
     def list(cls, route_params=None):
+        """
+        List all tournaments controller
+        """
         choice, player_id = PlayerView.display_list(Store.get_players())
 
         if choice == "1":
@@ -24,23 +27,22 @@ class PlayerController:
 
     @classmethod
     def create(cls, route_params=None):
+        """
+        Create new player controller
+        """
         # call the view that will return us a dict with the new player info
         data = PlayerView.create_player()
 
-        # You could specify each argument like:
-        # player = Player(id=data["id"], name=data["name"], age=data["age"])
-        # but it's easier to use `**` to pass the arguments
-        #player = Player(**data)
-
         # we add the player to the store
-        #store["players"].append(player)
-        #Database.save(store, player)
         Store.save("players", Player(**data).to_dict())
 
         return "manage_players", None
 
     @classmethod
     def delete(cls, route_params):
+        """
+        Remove player from the database
+        """
         # remove the player from the store
         Store.delete(id=route_params, table="players")
         
@@ -51,14 +53,12 @@ class PlayerController:
         """
         Update player information
         """
-
         player_id = route_params
     
         data = PlayerView.update_player()
         
         Store.edit(id=player_id, dict=Player(player_id,**data).to_dict(), table="players")
 
-            
         return "manage_players", None
 
 
