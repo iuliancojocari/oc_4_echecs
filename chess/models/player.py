@@ -17,7 +17,7 @@ class Player:
             "last_name": self.last_name,
             "date_of_birth": self.date_of_birth,
             "sex": self.sex,
-            "rank": self.rank
+            "rank": self.rank,
         }
 
     @classmethod
@@ -25,14 +25,13 @@ class Player:
         """
         Deserialize player object
         """
-        return cls(**{
-            "id": player_dict["id"],
-            "first_name": player_dict["first_name"],
-            "last_name": player_dict["last_name"],
-            "date_of_birth": player_dict["date_of_birth"],
-            "sex": player_dict["sex"],
-            "rank": player_dict["rank"]
-        })        
-        
-
-  
+        return cls(
+            **{
+                "id": player_dict["id"],
+                "first_name": player_dict["first_name"],
+                "last_name": player_dict["last_name"],
+                "date_of_birth": player_dict["date_of_birth"],
+                "sex": player_dict["sex"],
+                "rank": player_dict["rank"],
+            }
+        )

@@ -1,10 +1,9 @@
 from chess.models.player import Player
 from chess.views.player_view import PlayerView
-from chess.models.store import Store 
+from chess.models.store import Store
 
 
 class PlayerController:
-
     @classmethod
     def list(cls, route_params=None):
         """
@@ -47,7 +46,7 @@ class PlayerController:
         """
         # remove the player from the store
         Store.delete(id=route_params, table="players")
-        
+
         return "manage_players", None
 
     @classmethod
@@ -56,10 +55,12 @@ class PlayerController:
         Update player information
         """
         player_id = route_params
-    
+
         data = PlayerView.update_player()
-        
-        Store.edit(id=player_id, dict=Player(player_id,**data).to_dict(), table="players")
+
+        Store.edit(
+            id=player_id, dict=Player(player_id, **data).to_dict(), table="players"
+        )
 
         return "manage_players", None
 
@@ -75,9 +76,8 @@ class PlayerController:
         print("H. Homepage")
 
         choice = input("\nChoice: ")
-        
+
         if choice == "1":
             return "update_player_ranking", None
-        elif choice.lower() == "h": 
-            return "homepage", None 
-        
+        elif choice.lower() == "h":
+            return "homepage", None

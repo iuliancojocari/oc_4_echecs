@@ -1,9 +1,22 @@
-from chess.controllers.timestamp import get_timestamp
+from chess.utils.timestamp import get_timestamp
 from chess.models.match import Match
 from chess.models.round import Round
 
+
 class Tournament:
-    def __init__(self, id, name, location, date, time_control, players=[], description="", nb_rounds=4, rounds=[], scores={}):
+    def __init__(
+        self,
+        id,
+        name,
+        location,
+        date,
+        time_control,
+        players=[],
+        description="",
+        nb_rounds=4,
+        rounds=[],
+        scores={},
+    ):
         self.id = id
         self.name = name
         self.location = location
@@ -45,10 +58,9 @@ class Tournament:
         if null:
             self.scores[null["player_1"]] = self.scores.get(null["player_1"], 0) + 0.5
             self.scores[null["player_2"]] = self.scores.get(null["player_2"], 0) + 0.5
-        else : 
+        else:
             self.scores[str(winner)] = self.scores.get(str(winner), 0) + 1
             self.scores[str(loser)] = self.scores.get(str(loser), 0) + 0
-
 
     def sort_by_rank(self):
         """
@@ -108,8 +120,8 @@ class Tournament:
             self.sort_by_rank()
 
             # split list in 2
-            top_players_list = self.players[: len(self.players) // 2]
-            lower_players_list = self.players[len(self.players) // 2 :]
+            top_players_list = self.players[:len(self.players) // 2]
+            lower_players_list = self.players[len(self.players) // 2:]
 
             for i, player in enumerate(top_players_list):
                 player_1 = player
@@ -123,7 +135,6 @@ class Tournament:
             # if multiple players have the same score
             # we sort them by rank
             self.sort_players_by_score()
-            print([p.first_name for p in self.players])
             self.sort_by_rank_players_with_same_score()
 
             available_players = [p for p in self.players]
@@ -138,7 +149,7 @@ class Tournament:
                         available_players.pop(i)
                         match_number += 1
                         break
-                    
+
                 else:
                     next_player = available_players.pop(0)
                     match = Match(f"Match {match_number}", current_player, next_player)
@@ -146,11 +157,11 @@ class Tournament:
                     match_number += 1
 
         self.rounds.append(round)
-        
+
     @classmethod
     def set_round_end_date(cls, round):
         """
-        At the end of each round, update the 
+        At the end of each round, update the
         round end_date attribute
         """
         round.end_date = get_timestamp()
@@ -160,32 +171,36 @@ class Tournament:
         Serialize tournament object
         """
         return {
-            "id" : self.id, 
-            "name" : self.name, 
-            "location": self.location, 
-            "date" : self.date, 
-            "time_control": self.time_control, 
-            "players": [player.id for player in self.players], 
-            "description": self.description, 
+            "id": self.id,
+            "name": self.name,
+            "location": self.location,
+            "date": self.date,
+            "time_control": self.time_control,
+            "players": [player.id for player in self.players],
+            "description": self.description,
             "nb_rounds": self.nb_rounds,
             "rounds": [round.to_dict() for round in self.rounds],
-            "scores": self.scores
+            "scores": self.scores,
         }
+
     @classmethod
     def from_dict(cls, store, dict):
         """
         Deserialize tournament object
         """
-        return cls(**{
-            "id": dict["id"],
-            "name": dict["name"],
-            "location": dict["location"],
-            "date": dict["date"],
-            "time_control": dict["time_control"],
-            "players": [store.get_player_by_id(player) for player in dict["players"]],
-            "description": dict["description"],
-            "nb_rounds": dict["nb_rounds"],
-            "rounds": [Round.from_dict(store, round) for round in dict["rounds"]],
-            "scores": dict["scores"]
-        })
-
+        return cls(
+            **{
+                "id": dict["id"],
+                "name": dict["name"],
+                "location": dict["location"],
+                "date": dict["date"],
+                "time_control": dict["time_control"],
+                "players": [
+                    store.get_player_by_id(player) for player in dict["players"]
+                ],
+                "description": dict["description"],
+                "nb_rounds": dict["nb_rounds"],
+                "rounds": [Round.from_dict(store, round) for round in dict["rounds"]],
+                "scores": dict["scores"],
+            }
+        )

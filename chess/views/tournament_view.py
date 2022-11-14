@@ -1,8 +1,5 @@
-from chess.controllers.timestamp import get_timestamp
-
 
 class TournamentView:
-
     @classmethod
     def display_list(cls, tournaments):
         print("List of tournaments\n")
@@ -16,7 +13,7 @@ class TournamentView:
         if len(tournaments) == 0:
             print("\n1. New tournament")
         else:
-            print("\n1. New tournament")    
+            print("\n1. New tournament")
             print("2. Load tournament")
             print("3. Edit tournament")
             print("4. Delete tournament\n")
@@ -28,7 +25,6 @@ class TournamentView:
 
         if choice in ("2", "3", "4"):
             extra_info = int(input("\nEnter tournament Id: "))
-        
 
         return choice, extra_info
 
@@ -90,7 +86,7 @@ class TournamentView:
 
     @classmethod
     def update_tournament(cls):
-        print(f"Update tournament\n")
+        print("Update tournament\n")
 
         name = input("Name: ")
         location = input("Location: ")
@@ -135,14 +131,16 @@ class TournamentView:
             print(
                 f"\t{player.id}\t{player.first_name}\t{player.last_name}\t{player.rank}"
             )
-        
+
         for round in tournament.rounds:
             print(f"\n->{round.name}:")
 
             for match in round.matches:
-                print(
-                    f"# {match.name} - {match.player_1.first_name} {match.player_1.last_name} vs {match.player_2.first_name} {match.player_2.last_name} - Results : {match.results}"
+                text = (
+                    f"# {match.name} - {match.player_1.first_name} {match.player_1.last_name}"
+                    f" vs {match.player_2.first_name} {match.player_2.last_name} - Results : {match.results}"
                 )
+                print(text)
 
         round = len(tournament.rounds)
         print(f"\n1. Play round {round}")
@@ -160,9 +158,11 @@ class TournamentView:
         # show matchesess list
         print(f"{round.name}:")
         for match in round.matches:
-            print(
-                f"# {match.name} - {match.player_1.first_name} {match.player_1.last_name} vs {match.player_2.first_name} {match.player_2.last_name} - {match.results}"
+            text = (
+                f"# {match.name} - {match.player_1.first_name} {match.player_1.last_name}"
+                f" vs {match.player_2.first_name} {match.player_2.last_name} - {match.results}"
             )
+            print(text)
         print("")
         # show options
         options = 0
@@ -170,10 +170,10 @@ class TournamentView:
             if len(round.matches[match].results) == 0:
                 print(f"{match + 1}. Enter results - {round.matches[match].name}")
                 options += 1
-        
+
         if options == 0:
             return "0", None
-        else: 
+        else:
             choice = input("\nChoice: ")
             extra_info = None
 
@@ -187,8 +187,7 @@ class TournamentView:
                 extra_info = round.matches[3]
 
             return choice, extra_info
-            
-    
+
     @classmethod
     def save_scores(cls, match):
         print("Winner:\n")

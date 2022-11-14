@@ -1,5 +1,4 @@
 class RoundView:
-
     @classmethod
     def show_round(cls, tournament):
         # we select the last "round" of the list
@@ -7,8 +6,12 @@ class RoundView:
 
         # show matchs list
         print(f"{round.name}")
-        for match in round.matchs: 
-            print(f"\t{match.name} - {match.player_1.first_name} {match.player_1.last_name} vs {match.player_2.first_name} {match.player_2.last_name} - {match.results}")
+        for match in round.matchs:
+            text = (
+                f"\t{match.name} - {match.player_1.first_name} {match.player_1.last_name}"
+                f" vs {match.player_2.first_name} {match.player_2.last_name} - {match.results}"
+            )
+            print(text)
 
         # show options
         for match in round.matchs:
@@ -16,7 +19,7 @@ class RoundView:
             if len(match.results) == 0:
                 print(f"Enter results match {match.name}")
                 options += 1
-            
+
         if options == 0:
             choice = "0"
             return choice, None

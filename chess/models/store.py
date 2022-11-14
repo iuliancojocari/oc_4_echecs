@@ -2,13 +2,14 @@ from tinydb import TinyDB, Query, where
 from tinydb.operations import add
 from chess.models.tournament import Tournament
 from chess.models.player import Player
-from chess.utils.constants import DB_PATH
 
 
 class Store:
 
     # initiate the database
-    db = TinyDB(DB_PATH, indent=4)
+    db_path = "chess\\data\\database.json"
+
+    db = TinyDB(db_path, indent=4)
 
     @classmethod
     def save(cls, dict, table):
@@ -32,7 +33,7 @@ class Store:
         - dict : dictionnary to save into the database
         """
         return cls.db.table(table).upsert(dict, Query().id == id)
-    
+
     @classmethod
     def edit(cls, id, dict, table):
         """
@@ -50,7 +51,7 @@ class Store:
         """
         Delete record from the database
 
-        Parameters: 
+        Parameters:
         - id : record id
         - table : database table - tournaments or players
         """
@@ -74,7 +75,6 @@ class Store:
 
                 players_list.append(p)
 
-            
             return players_list
 
     @classmethod
@@ -82,7 +82,7 @@ class Store:
         """
         Get player by id
 
-        Parameters: 
+        Parameters:
         - id : player id
         """
         player = cls.db.table("players").get(Query().id == id)
@@ -101,7 +101,7 @@ class Store:
 
         if len(tournaments) == 0:
             return []
-        else: 
+        else:
             tournaments_list = []
 
             for tournament in tournaments:
@@ -122,4 +122,3 @@ class Store:
         tournament = cls.db.table("tournaments").get(Query().id == id)
 
         return Tournament.from_dict(store=cls, dict=tournament)
-         

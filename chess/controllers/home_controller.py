@@ -2,7 +2,6 @@ from chess.views.home_view import HomeView
 
 
 class HomePageController:
-
     @classmethod
     def dispatch(cls, route_params=None):
         """

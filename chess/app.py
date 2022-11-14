@@ -1,14 +1,8 @@
-from textwrap import indent
+import subprocess as sp
 from chess.controllers.home_controller import HomePageController
 from chess.controllers.player_controller import PlayerController
 from chess.controllers.tournament_controller import TournamentController
 from chess.controllers.reports_controller import ReportsController
-# from chess.models.player import Player
-# from chess.models.tournament import Tournament
-from chess.models.store import Store
-import subprocess as sp
-from tinydb import TinyDB
-
 
 
 class Application:
@@ -34,16 +28,14 @@ class Application:
         "display_tournament_players": ReportsController.display_tournament_players,
         "display_all_tournaments": ReportsController.display_all_tournaments,
         "display_tournament_round": ReportsController.display_tournament_rounds,
-        "display_tournament_matches": ReportsController.display_tournament_matches
-        
+        "display_tournament_matches": ReportsController.display_tournament_matches,
     }
 
     def __init__(self) -> None:
         self.route = "homepage"
         self.exit = False
         self.route_params = None
-        
-        
+
     def run(self):
         while not self.exit:
             # Clear the shell output
@@ -59,8 +51,7 @@ class Application:
             # Every controller should return two things:
             # - the next route to display
             # - the parameters needed for the next route
-            next_route, next_params = controller_method(self.route_params
-            )
+            next_route, next_params = controller_method(self.route_params)
 
             # set the next route and input
             self.route = next_route

@@ -1,5 +1,4 @@
 class ReportsView:
-
     @classmethod
     def display_menu(cls):
         print("1. List all players")
@@ -15,11 +14,15 @@ class ReportsView:
 
     @classmethod
     def display_all_players(cls, players):
-        
 
         print("ID\tFirst Name\tLast Name\tDate of birth\tSex\tRank")
         for player in players:
-            print(f"{player.id}\t{player.first_name}\t{player.last_name}\t{player.date_of_birth}\t{player.sex}\t{player.rank}")
+            text = (
+                f"{player.id}\t{player.first_name}"
+                f"\t{player.last_name}\t{player.date_of_birth}"
+                f"\t{player.sex}\t{player.rank}"
+            )
+            print(text)
 
         print("\n1. Reports")
         print("H. Homepage\n")
@@ -31,19 +34,25 @@ class ReportsView:
     @classmethod
     def display_tournaments(cls, tournaments):
         for tournament in tournaments:
-            print(
-                f"{tournament.id}\t{tournament.name}\t{tournament.location}\t{tournament.date}\t"
+            text = (
+                f"{tournament.id}\t{tournament.name}"
+                f"\t{tournament.location}\t{tournament.date}"
             )
+            print(text)
 
         choice = int(input("\nEnter tournament id : "))
 
         return choice
-    
+
     @classmethod
     def display_tournament_players(cls, players):
         for player in players:
-            print(f"{player.id}\t{player.first_name}\t{player.last_name}\t{player.date_of_birth}\t{player.sex}\t{player.rank}")
-        
+            text = (
+                f"{player.id}\t{player.first_name}\t{player.last_name}"
+                f"\t{player.date_of_birth}\t{player.sex}\t{player.rank}"
+            )
+            print(text)
+
         print("\n1. Reports")
         print("H. Homepage\n")
 
@@ -55,7 +64,11 @@ class ReportsView:
     def display_all_tournaments(cls, tournaments):
         print("ID\tName\tDescription\nLocation\tDate\tTime Control")
         for tournament in tournaments:
-            print( f"{tournament.id}\t{tournament.name}\t{tournament.description}\t{tournament.location}\t{tournament.date}\t{tournament.time_control}")
+            text = (
+                f"{tournament.id}\t{tournament.name}\t{tournament.description}"
+                f"\t{tournament.location}\t{tournament.date}\t{tournament.time_control}"
+            )
+            print(text)
 
         print("\n1. Reports")
         print("H. Homepage\n")
@@ -70,7 +83,6 @@ class ReportsView:
         for round in tournament.rounds:
             print(f"{round.name}\t{round.start_date}\t{round.end_date}")
 
-
         print("\n1. Reports")
         print("H. Homepage\n")
 
@@ -84,9 +96,11 @@ class ReportsView:
             print(f"\n->{round.name}:")
 
             for match in round.matches:
-                print(
-                    f"# {match.name} - {match.player_1.first_name} {match.player_1.last_name} vs {match.player_2.first_name} {match.player_2.last_name} - Results : {match.results}"
+                text = (
+                    f"# {match.name} - {match.player_1.first_name} {match.player_1.last_name}"
+                    f" vs {match.player_2.first_name} {match.player_2.last_name} - Results : {match.results}"
                 )
+                print(text)
 
         print("\n1. Reports")
         print("H. Homepage\n")

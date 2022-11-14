@@ -1,5 +1,4 @@
 class PlayerView:
-
     @classmethod
     def display_list(cls, players):
         print("Players list\n")
@@ -21,10 +20,10 @@ class PlayerView:
             extra_info = int(input("Enter player Id: "))
 
         return choice, extra_info
-    
+
     @classmethod
     def update_player(cls):
-        print(f"Edit player \n")
+        print("Edit player \n")
 
         first_name = input("First name: ")
         last_name = input("Last name: ")
@@ -37,9 +36,8 @@ class PlayerView:
             "first_name": first_name,
             "last_name": last_name,
             "date_of_birth": date_of_birth,
-            "sex": sex
+            "sex": sex,
         }
-
 
     @classmethod
     def create_player(cls):
@@ -49,13 +47,13 @@ class PlayerView:
         last_name = input("Last Name: ")
         date_of_birth = input("Date of birth (DD-MM-YYYY): ")
         sex = input("Sex (H or F): ")
-        
+
         return {
             "id": id,
             "first_name": first_name,
             "last_name": last_name,
             "date_of_birth": date_of_birth,
-            "sex": sex
+            "sex": sex,
         }
 
     @classmethod
@@ -64,8 +62,10 @@ class PlayerView:
         print("ID\tFirst Name\tLast Name\tRank")
 
         for player in players:
-            print(f"\t{player.id}\t{player.first_name}\t{player.last_name}\t{player.rank}")
-            
+            print(
+                f"\t{player.id}\t{player.first_name}\t{player.last_name}\t{player.rank}"
+            )
+
         player_id = int(input("Enter player id: "))
         rank = int(input("Enter player rank: "))
 

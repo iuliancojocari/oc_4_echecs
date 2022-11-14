@@ -1,11 +1,13 @@
 from chess.models.store import Store
 from chess.views.reports_view import ReportsView
 
-class ReportsController:
 
+class ReportsController:
     @classmethod
     def display_menu(cls, route_params=None):
-
+        """
+        Display reports menu
+        """
         choice = ReportsView.display_menu()
 
         if choice == "1":
@@ -23,8 +25,11 @@ class ReportsController:
 
     @classmethod
     def display_all_players(cls, route_params=None):
+        """
+        List all players
+        """
         players = Store.get_players()
-        
+
         print("1. By rank")
         print("2. In alphabetical order")
         filter = input("Choose a filter: ")
@@ -33,18 +38,21 @@ class ReportsController:
             players = sorted(players, key=lambda x: x.rank, reverse=True)
         elif filter == "2":
             players = sorted(players, key=lambda x: x.first_name, reverse=False)
-        
+
         choice = ReportsView.display_all_players(players)
 
         if choice == "1":
             next = "reports"
         elif choice.lower() == "h":
             next = "homepage"
-            
+
         return next, None
-    
+
     @classmethod
     def display_tournament_players(cls, route_params=None):
+        """
+        List all tournament players
+        """
         tournaments = Store.get_tournaments()
 
         tournament_id = ReportsView.display_tournaments(tournaments)
@@ -55,9 +63,13 @@ class ReportsController:
         filter = input("Choose a filter: ")
 
         if filter == "1":
-            tournament.players = sorted(tournament.players, key=lambda x: x.rank, reverse=True)
+            tournament.players = sorted(
+                tournament.players, key=lambda x: x.rank, reverse=True
+            )
         elif filter == "2":
-            tournament.players = sorted(tournament.players, key=lambda x: x.first_name, reverse=False)
+            tournament.players = sorted(
+                tournament.players, key=lambda x: x.first_name, reverse=False
+            )
 
         choice = ReportsView.display_tournament_players(tournament.players)
 
@@ -65,11 +77,14 @@ class ReportsController:
             next = "reports"
         elif choice.lower() == "h":
             next = "homepage"
-            
+
         return next, None
 
     @classmethod
     def display_all_tournaments(cls, route_params=None):
+        """
+        List tournaments
+        """
         tournaments = Store.get_tournaments()
 
         choice = ReportsView.display_all_tournaments(tournaments)
@@ -78,11 +93,14 @@ class ReportsController:
             next = "reports"
         elif choice.lower() == "h":
             next = "homepage"
-            
+
         return next, None
 
     @classmethod
     def display_tournament_rounds(cls, route_params=None):
+        """
+        List tournament rounds
+        """
         tournaments = Store.get_tournaments()
 
         tournament_id = ReportsView.display_tournaments(tournaments)
@@ -94,11 +112,14 @@ class ReportsController:
             next = "reports"
         elif choice.lower() == "h":
             next = "homepage"
-            
+
         return next, None
 
     @classmethod
     def display_tournament_matches(cls, route_params=None):
+        """
+        List tournament matches
+        """
         tournaments = Store.get_tournaments()
 
         tournament_id = ReportsView.display_tournaments(tournaments)
@@ -110,5 +131,5 @@ class ReportsController:
             next = "reports"
         elif choice.lower() == "h":
             next = "homepage"
-            
+
         return next, None
