@@ -18,6 +18,8 @@ class PlayerController:
             return "edit_player", player_id
         elif choice == "3":
             return "delete_player", player_id
+        elif choice == "4":
+            return "update_player_ranking", None
         elif choice.lower() == "q":
             return "quit", None
         elif choice.lower() == "h":
@@ -61,5 +63,21 @@ class PlayerController:
 
         return "manage_players", None
 
+    @classmethod
+    def update_player_ranking(cls, route_params=None):
+        players = Store.get_players()
 
+        player_id, rank = PlayerView.update_ranking(players)
+
+        Store.update_ranking(player_id, rank)
+
+        print("\n1. Update ranking")
+        print("H. Homepage")
+
+        choice = input("\nChoice: ")
+        
+        if choice == "1":
+            return "update_player_ranking", None
+        elif choice.lower() == "h": 
+            return "homepage", None 
         

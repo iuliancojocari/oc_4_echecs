@@ -6,7 +6,7 @@
             "last_name": "Player_1",
             "date_of_birth": "01-01-2022",
             "sex": "h",
-            "rank": 0
+            "rank": 6
         },
         "2": {
             "id": 2,
@@ -38,7 +38,7 @@
             "last_name": "Player_5",
             "date_of_birth": "01-01-2022",
             "sex": "ds",
-            "rank":0
+            "rank": 4
         },
         "6": {
             "id": 6,
@@ -50,7 +50,7 @@
         },
         "7": {
             "id": 7,
-            "first_name": "Player_7",
+            "first_name": "Cojocari",
             "last_name": "Player_7",
             "date_of_birth": "01-01-2000",
             "sex": "F",
@@ -58,7 +58,7 @@
         },
         "8": {
             "id": 8,
-            "first_name": "Player_8",
+            "first_name": "Andrei",
             "last_name": "Player_8",
             "date_of_birth": "01-01-2000",
             "sex": "F",
@@ -84,22 +84,243 @@
             ],
             "description": "First tournament",
             "nb_rounds": 4,
-            "rounds": [
-               
-            ],
+            "rounds": [],
             "scores": {}
         },
         "2": {
             "id": 2,
-            "name": "de",
-            "location": "e",
-            "date": "de",
+            "name": "2nd Tournament",
+            "location": "Lyon",
+            "date": "02-02-2022",
             "time_control": "Blitz",
-            "players": [],
-            "description": "de",
+            "players": [
+                1,
+                2,
+                4,
+                8,
+                7,
+                6,
+                3,
+                5
+            ],
+            "description": "2nd Tournament",
             "nb_rounds": 4,
-            "rounds": [],
-            "scores": {}
+            "rounds": [
+                {
+                    "name": "Round 1",
+                    "start_date": "14-11-2022-09:41",
+                    "end_date": "14-11-2022-09:42",
+                    "matches": [
+                        {
+                            "name": "Match 1",
+                            "player_1": 1,
+                            "player_2": 5,
+                            "player_1_color": "Black",
+                            "player_2_color": "White",
+                            "results": {
+                                "1": 1,
+                                "5": 0
+                            }
+                        },
+                        {
+                            "name": "Match 2",
+                            "player_1": 2,
+                            "player_2": 6,
+                            "player_1_color": "Black",
+                            "player_2_color": "White",
+                            "results": {
+                                "6": 1,
+                                "2": 0
+                            }
+                        },
+                        {
+                            "name": "Match 3",
+                            "player_1": 3,
+                            "player_2": 7,
+                            "player_1_color": "Black",
+                            "player_2_color": "White",
+                            "results": {
+                                "3": 0.5,
+                                "7": 0.5
+                            }
+                        },
+                        {
+                            "name": "Match 4",
+                            "player_1": 4,
+                            "player_2": 8,
+                            "player_1_color": "Black",
+                            "player_2_color": "White",
+                            "results": {
+                                "4": 1,
+                                "8": 0
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Round 2",
+                    "start_date": "14-11-2022-09:45",
+                    "end_date": "14-11-2022-09:45",
+                    "matches": [
+                        {
+                            "name": "Match 1",
+                            "player_1": 1,
+                            "player_2": 3,
+                            "player_1_color": "White",
+                            "player_2_color": "Black",
+                            "results": {
+                                "1": 1,
+                                "3": 0
+                            }
+                        },
+                        {
+                            "name": "Match 2",
+                            "player_1": 4,
+                            "player_2": 6,
+                            "player_1_color": "White",
+                            "player_2_color": "Black",
+                            "results": {
+                                "6": 1,
+                                "4": 0
+                            }
+                        },
+                        {
+                            "name": "Match 3",
+                            "player_1": 8,
+                            "player_2": 7,
+                            "player_1_color": "Black",
+                            "player_2_color": "White",
+                            "results": {
+                                "8": 0.5,
+                                "7": 0.5
+                            }
+                        },
+                        {
+                            "name": "Match 4",
+                            "player_1": 2,
+                            "player_2": 5,
+                            "player_1_color": "White",
+                            "player_2_color": "Black",
+                            "results": {
+                                "2": 1,
+                                "5": 0
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Round 3",
+                    "start_date": "14-11-2022-09:45",
+                    "end_date": "14-11-2022-09:46",
+                    "matches": [
+                        {
+                            "name": "Match 1",
+                            "player_1": 1,
+                            "player_2": 6,
+                            "player_1_color": "Black",
+                            "player_2_color": "White",
+                            "results": {
+                                "1": 1,
+                                "6": 0
+                            }
+                        },
+                        {
+                            "name": "Match 2",
+                            "player_1": 2,
+                            "player_2": 8,
+                            "player_1_color": "Black",
+                            "player_2_color": "White",
+                            "results": {
+                                "8": 1,
+                                "2": 0
+                            }
+                        },
+                        {
+                            "name": "Match 3",
+                            "player_1": 7,
+                            "player_2": 3,
+                            "player_1_color": "Black",
+                            "player_2_color": "White",
+                            "results": {
+                                "3": 1,
+                                "7": 0
+                            }
+                        },
+                        {
+                            "name": "Match 4",
+                            "player_1": 4,
+                            "player_2": 5,
+                            "player_1_color": "White",
+                            "player_2_color": "Black",
+                            "results": {
+                                "4": 1,
+                                "5": 0
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Round 4",
+                    "start_date": "14-11-2022-10:55",
+                    "end_date": "14-11-2022-10:55",
+                    "matches": [
+                        {
+                            "name": "Match 1",
+                            "player_1": 1,
+                            "player_2": 2,
+                            "player_1_color": "White",
+                            "player_2_color": "Black",
+                            "results": {
+                                "2": 1,
+                                "1": 0
+                            }
+                        },
+                        {
+                            "name": "Match 2",
+                            "player_1": 4,
+                            "player_2": 8,
+                            "player_1_color": "Black",
+                            "player_2_color": "White",
+                            "results": {
+                                "8": 1,
+                                "4": 0
+                            }
+                        },
+                        {
+                            "name": "Match 3",
+                            "player_1": 7,
+                            "player_2": 6,
+                            "player_1_color": "White",
+                            "player_2_color": "Black",
+                            "results": {
+                                "7": 0.5,
+                                "6": 0.5
+                            }
+                        },
+                        {
+                            "name": "Match 4",
+                            "player_1": 3,
+                            "player_2": 5,
+                            "player_1_color": "White",
+                            "player_2_color": "Black",
+                            "results": {
+                                "3": 1,
+                                "5": 0
+                            }
+                        }
+                    ]
+                }
+            ],
+            "scores": {
+                "1": 4,
+                "3": 2,
+                "6": 0.5,
+                "4": 2,
+                "8": 2.5,
+                "7": 0.5,
+                "2": 3,
+                "5": 0
+            }
         }
     }
 }

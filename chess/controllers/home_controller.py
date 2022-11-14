@@ -15,4 +15,6 @@ class HomePageController:
             next = "manage_players"
         elif choice == "2":
             next = "manage_tournaments"
+        elif choice == "3":
+            next = "reports"
         return next, None

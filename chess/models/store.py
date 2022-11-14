@@ -1,4 +1,5 @@
-from tinydb import TinyDB, Query
+from tinydb import TinyDB, Query, where
+from tinydb.operations import add
 from chess.models.tournament import Tournament
 from chess.models.player import Player
 from chess.utils.constants import DB_PATH
@@ -53,7 +54,7 @@ class Store:
         - id : record id
         - table : database table - tournaments or players
         """
-        return cls.db.table(table).remove(doc_ids=[id])
+        return cls.db.table(table).remove(where("id") == id)
 
     @classmethod
     def get_players(cls):
@@ -86,6 +87,10 @@ class Store:
         """
         player = cls.db.table("players").get(Query().id == id)
         return Player.from_dict(player)
+
+    @classmethod
+    def update_ranking(cls, id, rank):
+        return cls.db.table("players").update(add("rank", rank), Query().id == id)
 
     @classmethod
     def get_tournaments(cls):

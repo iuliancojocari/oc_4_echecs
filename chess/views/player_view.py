@@ -9,7 +9,8 @@ class PlayerView:
 
         print("\n1. New player")
         print("2. Edit player")
-        print("3. Delete player\n")
+        print("3. Delete player")
+        print("4. Update ranking\n")
         print("Q. Exit")
         print("H. Homepage\n")
 
@@ -56,3 +57,16 @@ class PlayerView:
             "date_of_birth": date_of_birth,
             "sex": sex
         }
+
+    @classmethod
+    def update_ranking(cls, players):
+        print("Update ranking: \n")
+        print("ID\tFirst Name\tLast Name\tRank")
+
+        for player in players:
+            print(f"\t{player.id}\t{player.first_name}\t{player.last_name}\t{player.rank}")
+            
+        player_id = int(input("Enter player id: "))
+        rank = int(input("Enter player rank: "))
+
+        return player_id, rank

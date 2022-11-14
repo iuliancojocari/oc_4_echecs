@@ -77,6 +77,26 @@ class TournamentController:
             return "homepage", None
 
     @classmethod
+    def update(cls, route_params):
+        data = TournamentView.update_tournament()
+
+        Store.edit(route_params, Tournament(route_params, **data).to_dict(), "tournaments")
+
+        return "manage_tournaments", None
+
+    @classmethod
+    def delete(cls, route_params):
+        """
+        Delete tournament
+
+        Parameters:
+        - route_params : tournament id
+        """
+        Store.delete(route_params, "tournaments")
+
+        return "manage_tournaments", None
+
+    @classmethod
     def add_tournament_players(cls, route_params):
         """
         Add tournament players (8 players by default)
@@ -107,29 +127,8 @@ class TournamentController:
             total_players += 1
             nb_player += 1
 
-        return "manage_tournaments", None
+        return "play_tournament", None
 
-    
-    @classmethod
-    def update(cls, store, route_params):
-        tournament_id = route_params
-
-        for index, object in enumerate(store["tournaments"]):
-            if object.id == tournament_id:
-                data = TournamentView.update_tournament()
-                store["tournaments"][index] = Tournament(tournament_id, **data)
-            else:
-                raise Exception(f"Tournament {tournament_id} not found")
-
-        return "manage_tournaments", None
-
-    @classmethod
-    def delete(cls, store, route_params):
-        store["tournaments"] = [
-            t for t in store["tournaments"] if t.id != route_params
-        ]
-
-        return "manage_tournaments", None
 
     @classmethod
     def play_tournament(cls, route_params):
@@ -156,7 +155,7 @@ class TournamentController:
             elif choice == "2":
                 return "manage_tournaments", None
         
-        return "manage_tournaments", None
+        return "update_player_ranking", None
 
 
                  
@@ -219,10 +218,6 @@ class TournamentController:
         Store.update_tournament_info(id=tournament.id, dict=tournament.to_dict(), table="tournaments", )
 
         return "play_round", tournament.id
-
-
-
-
 
         
 

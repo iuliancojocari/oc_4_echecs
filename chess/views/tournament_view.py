@@ -2,6 +2,7 @@ from chess.controllers.timestamp import get_timestamp
 
 
 class TournamentView:
+
     @classmethod
     def display_list(cls, tournaments):
         print("List of tournaments\n")
@@ -27,6 +28,7 @@ class TournamentView:
 
         if choice in ("2", "3", "4"):
             extra_info = int(input("\nEnter tournament Id: "))
+        
 
         return choice, extra_info
 
@@ -94,12 +96,21 @@ class TournamentView:
         location = input("Location: ")
         date = input("Date (DD-MM-YYYY): ")
         description = input("Description: ")
+        print("Time control:\n\t1. Bullet\n\t2. Blitz\n\t3. Coup rapide")
+        choice = input("Time control option : ")
+        if choice == "1":
+            time_control = "Bullet"
+        elif choice == "2":
+            time_control = "Blitz"
+        elif choice == "3":
+            time_control = "Coup rapide"
 
         return {
             "name": name,
             "location": location,
             "date": date,
             "description": description,
+            "time_control": time_control,
         }
 
     @classmethod

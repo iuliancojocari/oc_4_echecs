@@ -2,6 +2,7 @@ from textwrap import indent
 from chess.controllers.home_controller import HomePageController
 from chess.controllers.player_controller import PlayerController
 from chess.controllers.tournament_controller import TournamentController
+from chess.controllers.reports_controller import ReportsController
 # from chess.models.player import Player
 # from chess.models.tournament import Tournament
 from chess.models.store import Store
@@ -26,7 +27,14 @@ class Application:
         "add_tournament_players": TournamentController.add_tournament_players,
         "play_tournament": TournamentController.play_tournament,
         "save_scores_and_results": TournamentController.save_scores_and_results,
-        "play_round": TournamentController.play_round
+        "play_round": TournamentController.play_round,
+        "update_player_ranking": PlayerController.update_player_ranking,
+        "reports": ReportsController.display_menu,
+        "display_all_players": ReportsController.display_all_players,
+        "display_tournament_players": ReportsController.display_tournament_players,
+        "display_all_tournaments": ReportsController.display_all_tournaments,
+        "display_tournament_round": ReportsController.display_tournament_rounds,
+        "display_tournament_matches": ReportsController.display_tournament_matches
         
     }
 
