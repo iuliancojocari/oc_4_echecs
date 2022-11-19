@@ -20,6 +20,8 @@ class ReportsController:
             next = "display_tournament_round"
         elif choice == "5":
             next = "display_tournament_matches"
+        elif choice.lower() == "h":
+            next = "homepage"
 
         return next, None
 

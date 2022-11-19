@@ -129,7 +129,7 @@ class TournamentController:
             total_players += 1
             nb_player += 1
 
-        return "play_tournament", None
+        return "play_tournament", tournament.id
 
     @classmethod
     def play_tournament(cls, route_params):

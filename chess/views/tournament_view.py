@@ -31,7 +31,7 @@ class TournamentView:
     @classmethod
     def create_tournament(cls):
         print("Create tournament\n")
-        id = input("Id: ")
+        id = int(input("Id: "))
         name = input("Name: ")
         location = input("Location: ")
         date = input("Date (DD-MM-YYYY): ")

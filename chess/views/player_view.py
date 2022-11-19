@@ -2,7 +2,7 @@ class PlayerView:
     @classmethod
     def display_list(cls, players):
         print("Players list\n")
-        print("ID\tFirst Name\tLast Name\tScore")
+        print("ID\tFirst Name\tLast Name")
         for player in players:
             print(f"{player.id}\t{player.first_name}\t{player.last_name}\t")
 

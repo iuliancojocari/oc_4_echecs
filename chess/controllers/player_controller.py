@@ -35,7 +35,7 @@ class PlayerController:
         data = PlayerView.create_player()
 
         # we add the player to the store
-        Store.save("players", Player(**data).to_dict())
+        Store.save(Player(**data).to_dict(), "players")
 
         return "manage_players", None
 
